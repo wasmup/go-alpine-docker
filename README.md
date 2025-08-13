@@ -3,9 +3,12 @@ Create reduced binary size go compiler docker image
 
 ```sh
 docker pull alpine:latest
+docker run -it --rm alpine:latest sh -c "cat /etc/alpine-release"
+docker history alpine:latest 
 
 wget https://go.dev/dl/go1.25.0.linux-amd64.tar.gz
 tar -xzf go1.25.0.linux-amd64.tar.gz
+go/bin/go version
 rm -rf ./go/doc ./go/misc ./go/test ./go/api
 
 docker build -t alpine-go:1.25.0 .
@@ -32,7 +35,7 @@ docker images --filter "dangling=true"
 docker rmi $(docker images -q --filter "dangling=true")
 
 docker images
-# 14.4MB
+# 14.7MB
 docker history my-app:1.0.0
 docker run --name my-app --network host --rm -d  my-app:1.0.0
 docker ps
@@ -52,7 +55,7 @@ docker builder prune
 docker builder prune -f	
 
 # Remove all unused build cache 
-docker builder prune -a	
+# docker builder prune -a	-f
 
 # Remove unused containers, images, cache 
 # docker system prune	
