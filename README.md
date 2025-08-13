@@ -43,4 +43,21 @@ docker stop my-app
 
 docker rmi my-app:1.0.0
 
+exit 
+
+# Remove dangling build cache only 
+docker builder prune	
+
+# Remove dangling build cache without prompt 
+docker builder prune -f	
+
+# Remove all unused build cache 
+docker builder prune -a	
+
+# Remove unused containers, images, cache 
+# docker system prune	
+
+# Remove all unused containers, images (including dangling)
+# docker system prune -a	
+
 ```
