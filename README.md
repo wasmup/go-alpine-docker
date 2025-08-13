@@ -25,6 +25,7 @@ docker run --rm  alpine-go:1.25.0 uname -a
 
 ## App build
 cd example-app
+ls
 docker build -t my-app:1.0.0 .
 
 docker images --filter "dangling=true"
@@ -37,7 +38,7 @@ docker run --name my-app --network host --rm -d  my-app:1.0.0
 docker ps
 # firefox localhost:8080
 curl -i http://localhost:8080
-
+# docker logs -f my-app
 docker stop my-app
 
 docker rmi my-app:1.0.0

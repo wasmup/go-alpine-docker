@@ -1,7 +1,9 @@
 package main
 
 import (
+	"flag"
 	"io"
+	"log/slog"
 	"net/http"
 )
 
@@ -10,6 +12,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var (
+		address string
+	)
+	flag.StringVar(&address, `a`, `:8080`, `the TCP address for the server to listen on`)
+	flag.Parse()
+
+	slog.Info(`starting web server`, `address`, address)
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(address, nil)
 }
