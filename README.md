@@ -10,12 +10,18 @@ wget https://go.dev/dl/go1.25.0.linux-amd64.tar.gz
 tar -xzf go1.25.0.linux-amd64.tar.gz
 go/bin/go version
 rm -rf ./go/doc ./go/misc ./go/test ./go/api
+file ./go/bin/go
+ls -lh  ./go/bin/go
+strip ./go/bin/go
+strip ./go/bin/gofmt
+strip ./go/pkg/tool/linux_amd64/*
+
 
 docker build -t alpine-go:1.25.0 .
 docker images --filter "dangling=true"
 docker rmi $(docker images -q --filter "dangling=true")
 docker images
-# 197MB
+# 197MB 192MB
 docker history  alpine-go:1.25.0 
 
 docker run --rm -it alpine-go:1.25.0 
